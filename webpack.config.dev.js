@@ -40,7 +40,11 @@ module.exports = {
                'css-loader',
                'sass-loader'
             ]
-         }
+         },
+         {
+            test: /\.svg|.png|.jpg|.jpeg$/,
+            type: 'asset/resource'
+         },
       ]
    },
    plugins: [
@@ -53,14 +57,15 @@ module.exports = {
          filename: '[name].[contenthash].css'
       }),
       new CleanWebpackPlugin(),
+      new CopyWebpackPlugin({
+         patterns: [
+            {
+               from: path.resolve(__dirname, 'src', 'assets/img'),
+               to: 'assets/img'
+            }
+         ]
+      }),
    ],
-   optimization: {
-      minimize: true,
-      minimizer: [
-         new CssMinimizerPlugin(),
-         new TerserWebpackPlugin(),
-      ]
-   },
    devServer: {
       static: path.join(__dirname, 'dist'),
       compress: true,

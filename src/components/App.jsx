@@ -1,8 +1,19 @@
 import React from 'react';
+import {Header} from './Header/Header.jsx';
+import {Search} from './Search/Search.jsx';
+import {Card} from './Card/Card.jsx';
 
 function App() {
    return (
-      <h1>Hello world</h1>
+      <React.Fragment>
+         <Header />
+         <Search />
+         <div className="cards-container">
+            <div className="card">
+               <Card />
+            </div>
+         </div>
+      </React.Fragment>
    );
 }
 
