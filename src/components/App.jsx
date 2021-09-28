@@ -1,7 +1,8 @@
 import React from 'react';
 import {Header} from './Header/Header.jsx';
 import {Search} from './Search/Search.jsx';
-import {Card} from './Card/Card.jsx';
+import {Footer} from './Footer/Footer.jsx';
+import {CardsGroup} from './CardsGroup/CardsGroup.jsx';
 
 function App() {
    return (
@@ -9,10 +10,12 @@ function App() {
          <Header />
          <Search />
          <div className="cards-container">
-            <div className="card">
-               <Card />
-            </div>
+            <CardsGroup />
+            {screen.width > 768 && (
+               <CardsGroup />
+            )}
          </div>
+         <Footer />
       </React.Fragment>
    );
 }

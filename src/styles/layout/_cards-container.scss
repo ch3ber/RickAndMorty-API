@@ -1,0 +1,22 @@
+.cards-container {
+   margin: 0 auto;
+   .cards-container__group {
+      margin-right: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin: 2rem 0;
+   }
+}
+.cards-container__group:last-of-type {
+   margin: 0;
+}
+
+@include media(1024px) {
+   .cards-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+};

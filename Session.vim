@@ -8,13 +8,15 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +13 src/components/App.jsx
-badd +9 src/components/Card/Card.jsx
+badd +15 src/components/App.jsx
+badd +18 src/components/Card/Card.jsx
+badd +2 src/services/API.js
+badd +3 src/components/CardsGroup/CardsGroup.jsx
 argglobal
 %argdel
-edit src/components/Card/Card.jsx
+edit src/components/App.jsx
 argglobal
-balt src/components/App.jsx
+balt src/components/CardsGroup/CardsGroup.jsx
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -25,12 +27,13 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 9 - ((8 * winheight(0) + 17) / 35)
+let s:l = 15 - ((14 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 9
-normal! 014|
+keepjumps 15
+normal! 028|
+lcd ~/workspace/RickAndMorty-API
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

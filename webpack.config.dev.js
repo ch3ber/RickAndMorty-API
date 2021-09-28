@@ -14,7 +14,6 @@ module.exports = {
       filename: '[name].[contenthash].js',
    },
    mode: 'development',
-   watch: true,
    resolve: {
       extensions: ['.js', '.jsx'],
    },
@@ -65,6 +64,7 @@ module.exports = {
             }
          ]
       }),
+      new Dotenv(),
    ],
    devServer: {
       static: path.join(__dirname, 'dist'),

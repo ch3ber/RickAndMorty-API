@@ -64,6 +64,7 @@ module.exports = {
             }
          ]
       }),
+      new Dotenv(),
    ],
    optimization: {
       minimize: true,

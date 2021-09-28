@@ -1,0 +1,37 @@
+.card {
+   background-color: $card-bg;
+   border-radius: 1rem;
+   display: grid;
+   grid-template-columns: 40% 60%;
+   grid-column-gap: 3rem;
+   overflow: hidden;
+   margin-bottom: 1rem;
+   place-items: center start;
+   font-size: 1.2rem;
+   .card__img {
+      place-self: stretch;
+   }
+   .card__data {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 1em 0;
+   }
+   .card__text {
+      margin: 0;
+      margin-bottom: 1em;
+   }
+   .card__text:last-of-type {
+      margin: 0;
+   }
+}
+.card:last-of-type {
+   margin-bottom: 0;
+}
+@include media(768px) {
+   .card {
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
+   }
+};
