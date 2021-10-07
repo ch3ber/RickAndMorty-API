@@ -1,11 +1,9 @@
 import React from 'react';
-import {AppContext} from '../../contexts/AppContext';
+import { AppContext } from '../../contexts/AppContext';
 
 function Search() {
 
-   const {
-      handleData,
-   } = React.useContext(AppContext);
+   const { handleData } = React.useContext(AppContext);
 
    return (
       <div className="search-bar">
@@ -16,4 +14,4 @@ function Search() {
    );
 }
 
-export {Search};
+export { Search };

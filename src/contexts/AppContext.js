@@ -7,6 +7,7 @@ const AppContext = React.createContext();
 
 function AppProvider(props) {
 
+   // traer datos de la api
    const { data } = getData();
 
    // si estamos en desktop cambiar setear cards con html si no undefined
@@ -20,36 +21,33 @@ function AppProvider(props) {
    }, [])
 
    // almacenar la busqueda del usuario
-   let userSearch;
    const [userSearchData, setUserSearchData] = React.useState();
-   // comentario uwu
-   const handleData = () => {
+
+   // pasar la busqueda del usuario
+   function handleData() {
       const query = document.querySelector('.search-bar__bar');
-      userSearch = query.value
-      searchData()
+      searchData(query.value);
    }
-   
-   const searchData = () => {
-      if (userSearch.lengt >= 2) {return}
-         (async () => {
-            const json = await fetch(`${API}/?name=${userSearch}`);
-            const data = await json.json();
-            setUserSearchData(data);
-            console.log(data);
-         })();
+
+   // realizar la busqueda en la api
+   const searchData = (query) => {
+      (async () => {
+         const json = await fetch(`${API}/?name=${query}`);
+         const data = await json.json();
+         setUserSearchData(data);
+      })();
    }
 
    return (
       <AppContext.Provider value={{
          cards,
-         setCards,
+         userSearchData,
          handleData,
          searchData,
-         userSearchData,
       }} >
          {props.children}
       </AppContext.Provider>
    );
 }
 
-export {AppContext, AppProvider};
+export { AppContext, AppProvider };

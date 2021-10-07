@@ -1,17 +1,17 @@
 import React from 'react';
 import { AppContext } from '../../contexts/AppContext';
-import {getData} from '../../services/API';
+import { getData } from '../../services/API';
 
-
-function Card({character}) {
+function Card({ character }) {
    const { data } = getData();
-
-   const {
-      userSearchData
-   } = React.useContext(AppContext);
+   const { userSearchData } = React.useContext(AppContext);
 
    const setAttribute = type => {
       if (userSearchData == undefined) {
+
+         if (data == undefined) {
+            return
+         }
          if (data != undefined) {
             switch (type) {
                case 'src':
@@ -27,10 +27,11 @@ function Card({character}) {
                default:
                   break;
             }
-         } else {
-            return ''
          }
-      } else {
+
+      }
+
+      if (userSearchData != undefined) {
          switch (type) {
             case 'src':
                return userSearchData.results[character].image
@@ -50,7 +51,7 @@ function Card({character}) {
 
    return (
       <div className="card">
-         <img className="card__img" src={setAttribute('src')} alt=""/>
+         <img className="card__img" src={setAttribute('src')} alt="Character rick and morty image" />
          <div className="card__data">
             <p className="card__text"><span style={{ fontWeight: 'bold' }}>Name:</span> {setAttribute('name')}</p>
             <p className="card__text"><span style={{ fontWeight: 'bold' }}>Specie:</span> {setAttribute('specie')}</p>
@@ -61,4 +62,4 @@ function Card({character}) {
    );
 }
 
-export {Card};
+export { Card };

@@ -6,7 +6,6 @@ function CardsContainer() {
 
    const {
       cards,
-      searchData,
    } = React.useContext(AppContext);
 
    return (
