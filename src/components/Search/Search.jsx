@@ -4,14 +4,15 @@ import {AppContext} from '../../contexts/AppContext';
 function Search() {
 
    const {
-      onSearch,
+      handleData,
    } = React.useContext(AppContext);
 
    return (
-      <React.Fragment>
-         <input className="search" type="search" placeholder="Search..." onChange={onSearch}/>
-         <button>See More</button>
-      </React.Fragment>
+      <div className="search-bar">
+         <input className="search-bar__bar shadow" type="search" placeholder="Search by name" />
+         <button className="button search-bar__submit" onClick={handleData}>SS</button>
+         <button className="button search-bar__gallery">::</button>
+      </div>
    );
 }
 

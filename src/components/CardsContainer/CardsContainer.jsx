@@ -6,13 +6,16 @@ function CardsContainer() {
 
    const {
       cards,
-      searched,
+      searchData,
    } = React.useContext(AppContext);
 
    return (
       <div className="cards-container">
-         <CardsGroup group={1} cardsSearched={searched} />
-         {(screen.width > 1200 && <CardsGroup group={2} cardsSearched={searched} />) || cards}
+         <CardsGroup group={1} />
+
+         {/* si estamos en un desktop rederizar otro grupo de cards, actualizar los grupos de cards cuando se rezise la pantalla */}
+         {(window.innerWidth > 1200 && <CardsGroup group={2} />) || cards}
+
       </div>
    );
 }
