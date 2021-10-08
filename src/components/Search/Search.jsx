@@ -1,5 +1,7 @@
 import React from 'react';
 import { AppContext } from '../../contexts/AppContext';
+import menuIcon from '../../assets/img/menu.svg';
+import searchIcon from '../../assets/img/search-icon.svg';
 
 function Search() {
 
@@ -8,8 +10,8 @@ function Search() {
    return (
       <div className="search-bar">
          <input className="search-bar__bar shadow" type="search" placeholder="Search by name" />
-         <button className="button search-bar__submit" onClick={handleData}>SS</button>
-         <button className="button search-bar__gallery">::</button>
+         <button className="button search-bar__submit" onClick={handleData}><img src={searchIcon} alt="Search icon color white"/></button>
+         <button className="button search-bar__gallery shadow"><img src={menuIcon} alt="Menu icon color white"/></button>
       </div>
    );
 }

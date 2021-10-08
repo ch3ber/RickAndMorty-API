@@ -50,7 +50,7 @@ function Card({ character }) {
    }
 
    return (
-      <div className="card">
+      <div className="card shadow">
          <img className="card__img" src={setAttribute('src')} alt="Character rick and morty image" />
          <div className="card__data">
             <p className="card__text"><span style={{ fontWeight: 'bold' }}>Name:</span> {setAttribute('name')}</p>
