@@ -9,7 +9,7 @@ function Search() {
 
    return (
       <div className="search-bar">
-         <input className="search-bar__bar shadow" type="search" placeholder="Search by name" />
+         <input className="search-bar__bar shadow" type="text" placeholder="Search by name" />
          <button className="button search-bar__submit" onClick={handleData}><img src={searchIcon} alt="Search icon color white"/></button>
          <button className="button search-bar__gallery shadow"><img src={menuIcon} alt="Menu icon color white"/></button>
       </div>

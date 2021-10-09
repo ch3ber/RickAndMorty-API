@@ -9,8 +9,3 @@
     height: 100%;
     border-radius: 50%;
 }
-@include media(768px) {
-    .button {
-        padding: 2rem;
-    }
-}

@@ -13,12 +13,13 @@
    background-color: $search-bg;
    color: $text-col;
    font-size: 14px;
+   height: 100%;
 }
 .search-bar__submit {
    border-radius: 0 50% 50% 0;
    display: grid;
    place-content: center center;
-   padding: .65rem;
+   cursor: pointer;
    height: 100%;
 
    box-shadow: 0px 10px 7px -5px darken($search-bg, 10);
@@ -27,7 +28,6 @@
 
    img {
       max-width: 70%;
-      margin: 0 auto;
    }
 }
 .search-bar__gallery {
@@ -35,25 +35,39 @@
    place-content: center center;
    margin-left: 2rem;
    cursor: pointer;
-   padding: .65rem;
    height: 100%;
 
    img {
+      padding: .2rem;
       max-width: 70%;
       margin: 0 auto;
    }
 }
+.search-bar__submit:focus,
+.search-bar__submit:hover,
 .search-bar__gallery:focus,
 .search-bar__gallery:hover {
    background-color: darken($search-bg, 3);
 }
 
 @include media(768px) {
+   .search-bar {
+      height: 6rem;
+   }
    .search-bar__bar {
-      min-width: 85%;
+      min-width: 80%;
       font-size: 25px;
       padding: 1.5rem;
-      height: 6rem;
+   }
+   .search-bar__submit {
+      img {
+         margin: 0 1.7rem;
+      }
+   }
+   .search-bar__gallery {
+      img {
+         padding: 1.5rem;
+      }
    }
    .search-bar__submit,
    .search-bar__gallery {
