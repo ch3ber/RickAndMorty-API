@@ -50,7 +50,7 @@
    background-color: darken($search-bg, 3);
 }
 
-@include media(768px) {
+@include media(1028px) {
    .search-bar {
       height: 6rem;
    }

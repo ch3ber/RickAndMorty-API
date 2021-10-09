@@ -1,6 +1,7 @@
 import React from 'react';
 import { CardsGroup } from '../components/CardsGroup/CardsGroup';
 import { getData } from '../services/API';
+import { Error } from '../components/Error/Error';
 const API = process.env.API;
 
 const AppContext = React.createContext();
@@ -32,9 +33,13 @@ function AppProvider(props) {
    // realizar la busqueda en la api
    const searchData = (query) => {
       (async () => {
-         const json = await fetch(`${API}/?name=${query}`);
-         const data = await json.json();
-         setUserSearchData(data);
+         try {
+            const json = await fetch(`${API}/?name=${query}`);
+            const data = await json.json();
+            setUserSearchData(data);
+         } catch (error) {
+            setUserSearchData('error');
+         }
       })();
    }
 

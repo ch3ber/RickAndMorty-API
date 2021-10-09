@@ -1,18 +1,17 @@
 import React from 'react';
 import {Card} from '../Card/Card';
 
-function CardsGroup({group}) {
-   let numberGroup = 0;
+function CardsGroup({characterModifier}) {
    return (
       <div className="cards-container__group">
          <Card
-            character={numberGroup += group}
+            character={characterModifier}
          />
          <Card
-            character={numberGroup += 1 + group}
+            character={1 + characterModifier}
          />
          <Card
-            character={numberGroup += group}
+            character={2 + characterModifier}
          />
       </div>
    );
