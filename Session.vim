@@ -8,9 +8,9 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +63 src/components/Card/Card.jsx
-badd +45 src/contexts/AppContext.js
-badd +6 src/components/Error/Error.jsx
+badd +46 src/components/Card/Card.jsx
+badd +81 src/contexts/AppContext.js
+badd +16 src/styles/base/_utils.scss
 argglobal
 %argdel
 edit src/contexts/AppContext.js
@@ -26,11 +26,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 39 - ((16 * winheight(0) + 18) / 36)
+let s:l = 59 - ((13 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 39
+keepjumps 59
 normal! 0
 lcd ~/workspace/RickAndMorty-API
 tabnext 1

@@ -1,7 +1,6 @@
 import React from 'react';
 import { AppContext } from '../../contexts/AppContext';
 import { getData } from '../../services/API';
-import { Error } from '../../components/Error/Error';
 
 function Card({ character }) {
    const { data } = getData();
@@ -30,10 +29,6 @@ function Card({ character }) {
             }
          }
 
-      }
-
-      if (userSearchData == 'error') {
-         return <Error />
       }
 
       if (userSearchData != undefined && userSearchData.results != undefined) {
