@@ -6,7 +6,7 @@ function getData() {
 
    React.useEffect(() => {
       (async () => {
-         const json = await fetch(API);
+         const json = await fetch(`${API}/api/character`);
          const data = await json.json();
          setData(data);
       })();

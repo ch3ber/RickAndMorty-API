@@ -53,7 +53,7 @@ function AppProvider(props) {
                return
             }
             //consulta a la api
-            const json = await fetch(`${API}/?name=${query}`);
+            const json = await fetch(`${API}/api/character/?name=${query}`);
             const data = await json.json();
             setUserSearchData(data);
             //mostrar mensaje en caso de error
