@@ -37,7 +37,6 @@ function AppProvider(props) {
          if (query.length < 1) {return }
          // no realizar multiples peticiones si no se escribe otro personaje a buscar
          if (searchBarValue == document.querySelector('.search-bar__bar').value && searchError != undefined) {
-            console.log('retorne')
             return
          }
          try {
