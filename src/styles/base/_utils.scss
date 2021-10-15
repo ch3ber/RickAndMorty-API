@@ -10,11 +10,12 @@
     border-radius: 50%;
 }
 .error-alert {
-   background-color: #f00;
-   color: $text-col;
+   background-color: $terciary;
+   color: $card-bg;
+   border: 3px solid $secondary;
    position: fixed;
    top: 5%;
    right: 5%;
-   padding: 3rem;
+   padding: 1.5rem;
    border-radius: 1rem;
 }

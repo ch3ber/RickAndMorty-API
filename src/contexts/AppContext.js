@@ -28,25 +28,33 @@ function AppProvider(props) {
 
    //almacenar el valor de la barra de busqueda para compararlo
    const [searchBarValue, setSearchBarValue] = React.useState();
+   const [searchError, setSearchError] = React.useState();
 
    // realizar la busqueda en la api
    const searchData = (query) => {
       (async () => {
+         // retornar si no se esta buscando nada
+         if (query.length < 1) {return }
+         // no realizar multiples peticiones si no se escribe otro personaje a buscar
+         if (searchBarValue == document.querySelector('.search-bar__bar').value && searchError != undefined) {
+            console.log('retorne')
+            return
+         }
          try {
-            // no realizar multiples peticiones si no se escribe otro personaje a buscar
-            if (searchBarValue == document.querySelector('.search-bar__bar').value && userSearchData.error != undefined) {
-               return
-            }
             //consulta a la api
             const json = await fetch(`${API}/api/character/?name=${query}`);
             const data = await json.json();
-            setUserSearchData(data);
             //mostrar mensaje en caso de error
             if (data.error) {
+               setSearchError(data.error);
                showError('No se encontro lo que buscas, busca otro personaje');
             }
+            if (data.error == undefined) {
+               setUserSearchData(data);
+            }
          } catch (error) {
-            showError('Algo salio mal, intenta de nuevo en otro momento');
+            setSearchError(data.error);
+            showError('No se encontro lo que buscas, busca otro personaje');
          }
       })();
    }
