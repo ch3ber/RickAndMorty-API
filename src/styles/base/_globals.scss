@@ -7,21 +7,11 @@ html {
 }
 body {
    max-height: 100vh;
-   padding: 3rem;
-   padding-bottom: 0;
    background-color: $ui-bg;
    color: $text-col;
    font-family: Helvetica;
-   font-size: 16px;
-   max-height: 100vh;
-   overflow: hidden;
+   font-size: 1.6rem;
 }
-@include media(468px) {
-   body {
-      max-height: unset;
-      overflow: unset;
-   }
-};
 img {
    max-width: 100%;
    background-size: cover;

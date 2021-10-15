@@ -1,19 +1,40 @@
 import React from 'react';
 import { AppContext } from '../../contexts/AppContext';
-import {CardsGroup} from '../CardsGroup/CardsGroup';
+import {getData} from '../../services/API';
+import {Card} from '../Card/Card';
 
 function CardsContainer() {
 
    const {
-      cards,
-   } = React.useContext(AppContext);
+      data,
+      dataLoading
+   } = getData();
+   const { userSearchData } = React.useContext(AppContext);
 
    return (
       <div className="cards-container">
-         <CardsGroup characterModifier={0} />
 
-         {/* si estamos en un desktop rederizar otro grupo de cards, actualizar los grupos de cards cuando se rezise la pantalla */}
-         {(window.innerWidth > 1200 && <CardsGroup characterModifier={3} />) || cards}
+         {dataLoading && <p>cargando tu wea uwu</p>}
+         {(!dataLoading && !userSearchData) && data.results.map( character => (
+            <Card
+               key={character.id}
+               srcImg={character.image}
+               name={character.name}
+               species={character.species}
+               origin={character.origin.name}
+               status={character.status}
+            />
+         ))}
+         {userSearchData != undefined && userSearchData.results.map( character => (
+            <Card
+               key={character.id}
+               srcImg={character.image}
+               name={character.name}
+               species={character.species}
+               origin={character.origin.name}
+               status={character.status}
+            />
+         ))}
 
       </div>
    );
