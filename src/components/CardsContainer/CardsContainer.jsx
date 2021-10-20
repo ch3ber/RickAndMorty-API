@@ -1,7 +1,7 @@
 import React from 'react';
+import { getData } from '../../services/API';
 import { AppContext } from '../../contexts/AppContext';
-import {getData} from '../../services/API';
-import {Card} from '../Card/Card';
+import { Card } from '../Card/Card';
 import leftArrow from '../../assets/img/left-arrow.svg';
 import rightArrow from '../../assets/img/right-arrow.svg';
 
@@ -30,7 +30,8 @@ function CardsContainer() {
 
          <div className="cards-container">
 
-            { dataLoading && <p>cargando tu wea uwu</p> }
+            { dataLoading && <p>loading content...</p> }
+
             { (!dataLoading && !userSearchData) && data.results.map(character => (
                <Card
                   key={character.id}
@@ -55,7 +56,7 @@ function CardsContainer() {
          </div>
 
          <img
-            className={nextPage <= totalPages ? "main__arrow main__arrow--right main__arrow--show" : "main__arrow main__arrow--right"}
+            className={ nextPage <= totalPages ? "main__arrow main__arrow--right main__arrow--show" : "main__arrow main__arrow--right" }
             src={ rightArrow }
             alt="right arrow color aqua"
             onClick={ () => onChangePage(true) }
@@ -65,4 +66,4 @@ function CardsContainer() {
    );
 }
 
-export {CardsContainer};
+export { CardsContainer };

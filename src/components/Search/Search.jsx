@@ -8,17 +8,23 @@ function Search() {
 
    return (
       <div className="search-bar">
+
          <input
             className="search-bar__bar shadow"
             type="text"
             placeholder="Search by name"
          />
+
          <button
             className="button search-bar__submit"
-            onClick={handleData}
+            onClick={ handleData }
          >
-               <img src={searchIcon} alt="Search icon color white" />
+            <img
+               src={searchIcon}
+               alt="Search icon color white"
+            />
          </button>
+
       </div>
    );
 }

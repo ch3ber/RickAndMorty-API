@@ -9,8 +9,7 @@ function AppProvider(props) {
 
    // pasar la busqueda del usuario
    const handleData = () => {
-      const queryElement = document.querySelector('.search-bar__bar');
-      const query = queryElement.value;
+      const query = document.querySelector('.search-bar__bar').value;
       setSearchBarValue(query);
       if (searchBarValue == query) return; // retornar si se busca el mismo personaje
       searchInApi(`name=${query}`);
@@ -36,17 +35,18 @@ function AppProvider(props) {
       (async () => {
          try {
             //consulta a la api
-            const json = await fetch(`${API}/api/character/?${query}`);
-            const data = await json.json();
+            const response = await fetch(`${API}/api/character/?${query}`);
+            const json = await response.json();
             //mostrar mensaje en caso de error
-            if (data.error) {
+            if (json.error) {
                showError('No se encontro lo que buscas');
                return
             }
-            if (data.error == undefined) {
-               setUserSearchData(data);
+            // si no hay error setear la informacion de la api
+            if (json.error == undefined) {
+               setUserSearchData(json);
+               setTotalPages(json.info.pages);
             }
-            setTotalPages(data.info.pages);
          } catch (error) {
             showError('Ocurrio un error, intenta de nuevo');
          }
@@ -56,6 +56,7 @@ function AppProvider(props) {
    const [nextPage, setNextPage] = React.useState(2); // pagina siguiente
 
    const onChangePage = isNext => {
+      // si usuario busco algo cambiar a la paginacion del usuario
       if (searchBarValue != undefined && searchBarValue != '') {
          if (isNext) {
             searchInApi(`page=${nextPage}&name=${searchBarValue}`);
@@ -66,6 +67,7 @@ function AppProvider(props) {
             setNextPage(prevState => prevState - 1);
          }
       }
+      // si el usuario no busco nada usar la paginacion por defecto
       if (searchBarValue == undefined || searchBarValue == '') {
          if (isNext) {
             searchInApi(`page=${nextPage}`);
@@ -77,7 +79,7 @@ function AppProvider(props) {
          }
       }
    }
-
+   
    return (
       <AppContext.Provider value={{
          userSearchData,
