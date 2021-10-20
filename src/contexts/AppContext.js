@@ -5,18 +5,20 @@ const AppContext = React.createContext();
 
 function AppProvider(props) {
 
-   // almacenar la busqueda del usuario
-   const [userSearchData, setUserSearchData] = React.useState();
+   const [searchBarValue, setSearchBarValue] = React.useState(); // valor de la barra de busqueda
 
    // pasar la busqueda del usuario
-   function handleData() {
-      const query = document.querySelector('.search-bar__bar');
-      setSearchBarValue(query.value);
-      searchData(query.value);
+   const handleData = () => {
+      const queryElement = document.querySelector('.search-bar__bar');
+      const query = queryElement.value;
+      setSearchBarValue(query);
+      if (searchBarValue == query) return; // retornar si se busca el mismo personaje
+      searchInApi(`name=${query}`);
+      setNextPage(2);
    }
 
    // mostrar una alerta de error
-   const showError = (errorInfo) => {
+   const showError = errorInfo => {
       const paragraph = document.createElement('P');
       paragraph.innerText = `Ocurrio un error: ${errorInfo}`;
       paragraph.classList.add('error-alert');
@@ -26,43 +28,63 @@ function AppProvider(props) {
       }, 3500)
    }
 
-   //almacenar el valor de la barra de busqueda para compararlo
-   const [searchBarValue, setSearchBarValue] = React.useState();
-   const [searchError, setSearchError] = React.useState();
+   const [totalPages, setTotalPages] = React.useState(3);
+   const [userSearchData, setUserSearchData] = React.useState(); // datos de la api segun la busqueda del usuario
 
    // realizar la busqueda en la api
-   const searchData = (query) => {
+   const searchInApi = query => {
       (async () => {
-         // retornar si no se esta buscando nada
-         if (query.length < 1) {return }
-         // no realizar multiples peticiones si no se escribe otro personaje a buscar
-         if (searchBarValue == document.querySelector('.search-bar__bar').value && searchError != undefined) {
-            return
-         }
          try {
             //consulta a la api
-            const json = await fetch(`${API}/api/character/?name=${query}`);
+            const json = await fetch(`${API}/api/character/?${query}`);
             const data = await json.json();
             //mostrar mensaje en caso de error
             if (data.error) {
-               setSearchError(data.error);
-               showError('No se encontro lo que buscas, busca otro personaje');
+               showError('No se encontro lo que buscas');
+               return
             }
             if (data.error == undefined) {
                setUserSearchData(data);
             }
+            setTotalPages(data.info.pages);
          } catch (error) {
-            setSearchError(data.error);
-            showError('No se encontro lo que buscas, busca otro personaje');
+            showError('Ocurrio un error, intenta de nuevo');
          }
       })();
+   }
+
+   const [nextPage, setNextPage] = React.useState(2); // pagina siguiente
+
+   const onChangePage = isNext => {
+      if (searchBarValue != undefined && searchBarValue != '') {
+         if (isNext) {
+            searchInApi(`page=${nextPage}&name=${searchBarValue}`);
+            setNextPage(prevState => prevState + 1);
+         }
+         if (!isNext) {
+            searchInApi(`page=${nextPage - 2}&name=${searchBarValue}`);
+            setNextPage(prevState => prevState - 1);
+         }
+      }
+      if (searchBarValue == undefined || searchBarValue == '') {
+         if (isNext) {
+            searchInApi(`page=${nextPage}`);
+            setNextPage(prevState => prevState + 1);
+         }
+         if (!isNext) {
+            searchInApi(`page=${nextPage - 2}`);
+            setNextPage(prevState => prevState - 1);
+         }
+      }
    }
 
    return (
       <AppContext.Provider value={{
          userSearchData,
          handleData,
-         searchData,
+         nextPage,
+         onChangePage,
+         totalPages,
       }} >
          {props.children}
       </AppContext.Provider>

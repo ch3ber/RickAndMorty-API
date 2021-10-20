@@ -43,7 +43,7 @@ module.exports = {
          {
             test: /\.svg|.png|.jpg|.jpeg$/,
             type: 'asset/resource'
-         }
+         },
       ]
    },
    plugins: [
