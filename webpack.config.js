@@ -6,6 +6,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
    entry: './src/index.js',
@@ -56,6 +57,18 @@ module.exports = {
          filename: '[name].[contenthash].css'
       }),
       new CleanWebpackPlugin(),
+      new ImageMinimizerPlugin({
+         deleteOriginalAssets: false,
+         filename: "[path][name].webp",
+         minimizerOptions: {
+            plugins: ["imagemin-webp"],
+         },
+      }),
+      new ImageMinimizerPlugin({
+         minimizerOptions: {
+            plugins: ["pngquant"],
+         },
+      }),
       new CopyWebpackPlugin({
          patterns: [
             {
